@@ -6,20 +6,22 @@ Zend Framework Gandi API Service extension.
 Installation
 -----------
 1. Place the folder 'Narno' in your library path (next to the Zend folder)
-2. Register the namespace 'Narno' or include le library via `<?php require_once 'Narno/Service/gandi.php'; ?>`
+2. Register the namespace 'Narno' or include le library via `require_once 'Narno/Service/gandi.php';`
 
 Usage
 -----------
-    <?php
-    try {
-        $gandi = new Narno_Service_Gandi('your_api_key');
-        
-        Zend_Debug::dump($gandi->getVmInfo('your_vm_id'));
 
-    } catch (Exception $e) {
-        echo $e->getMessage();
-    }
-    ?>
+```php
+<?php
+try {
+    $gandi = new Narno_Service_Gandi('your_api_key');
+    
+    Zend_Debug::dump($gandi->getVmInfo('your_vm_id'));
+
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
+```
 
 Available Methods
 -----------
