@@ -1,14 +1,26 @@
 <?php
 /**
- * @package Narno_Service
+ * Zend_Service_Gandi
+ *
+ * @link      https://github.com/Narno/Zend_Service_Gandi
+ * @copyright Copyright (c) 2011-2013 Arnaud Ligny
+ * @license   http://opensource.org/licenses/MIT MIT license
+ * @package   Zend_Service
  */
 
 /**
- * @category   Narno
- * @package    Narno_Service
- * @subpackage Gandi
+ * @see Zend_XmlRpc_Client
  */
-class Narno_Service_Gandi
+require_once 'Zend/XmlRpc/Client.php';
+
+/**
+ * @category   Zend
+ * @package    Zend_Service
+ * @subpackage Gandi
+ * 
+ * @todo Make it compatible with 3.3.0 version
+ */
+class Zend_Service_Gandi
 {
     /**
      * Gandi Hosting API key
@@ -33,10 +45,7 @@ class Narno_Service_Gandi
     public function __construct($apiKey)
     {
         $this->_apiKey = (string) $apiKey;
-        /**
-         * @see Zend_XmlRpc_Client
-         */
-        require_once 'Zend/XmlRpc/Client.php';
+
         try {
             $this->_client = new Zend_XmlRpc_Client('https://rpc.gandi.net/xmlrpc/');
             $this->_client->setSkipSystemLookup(true);
@@ -46,7 +55,7 @@ class Narno_Service_Gandi
             throw new Exception('HTTP Exception: ' . $e->getCode() . "\n" . $e->getMessage());
         }
     }
-    
+
     /**
      * Gandi API call
      * 
@@ -112,7 +121,8 @@ class Narno_Service_Gandi
     }
     
     /**
-     * @todo PASS functions
+     * @todo Implement PASS API methods
+     * @link http://doc.rpc.gandi.net/paas/reference.html
      */
     public function getPassInfo($id)
     {
