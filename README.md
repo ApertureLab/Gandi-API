@@ -3,12 +3,15 @@ Description
 
 _Zend_Service_Gandi_ provides a simple PHP library for the Gandi API.
 
+Gandi API documentation: http://doc.rpc.gandi.net
+
 
 Dependencies
 ------------
 
-* PHP 5.2.4
+* PHP 5.2.4+
 * Zend Framework: http://www.framework.zend.com/downloads/latest#ZF1
+* Gandi account: https://www.gandi.net
 
 
 How to use
