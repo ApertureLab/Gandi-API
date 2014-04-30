@@ -4,3 +4,7 @@ Desktop.ini
 
 # Mac crap
 .DS_Store
+
+# Composer
+composer.phar
+vendor/*

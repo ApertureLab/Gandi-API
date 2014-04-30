@@ -1,15 +1,25 @@
 Description
 -----------
 
-*Zend_Service_Gandi* provides a simple PHP library for the [Gandi API](http://doc.rpc.gandi.net).
+*ZendService_Gandi* provides a simple PHP library for the [Gandi API](http://doc.rpc.gandi.net).
 
 
 Dependencies
 ------------
 
-* PHP 5.2.4+
-* [Zend Framework 1](http://www.framework.zend.com/downloads/latest#ZF1)
+* PHP 5.3+
+* Zend\Xmlrpc
+* Zend\Xml
 * [Gandi](https://www.gandi.net) account
+
+
+Installation
+------------
+
+You can install this component using Composer with following commands:
+
+    curl -s https://getcomposer.org/installer | php
+    php composer.phar install
 
 
 Usage
@@ -17,10 +27,15 @@ Usage
 
 ```php
 <?php
-require_once 'Zend/Service/Gandi.php';
+// Composer autoloading
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    $loader = include __DIR__ . '/vendor/autoload.php';
+}
+
+use ZendService\Gandi\Gandi as Gandi;
 
 try {
-    $gandi = new Zend_Service_Gandi('your_api_key');
+    $gandi = new Gandi('your_api_key');
     // Fetches VM infos and print
     print_r($gandi->getVmInfo('your_vm_id'));
 } catch (Exception $e) {
@@ -29,21 +44,9 @@ try {
 ```
 
 
-Available Methods
------------------
-
-* Hosting
-  * _getAccountInfo()_: Get Gandi Hosting account info
-  * _getVmList()_: Get VM list
-  * _getVmInfo($id)_: Get VM info by VM Id filter
-  * _getGraph($vmId, $target, $deviceNumber)_: Return graph URL
-* PASS
-  * _getPassInfo($id)_: Get Gandi PASS info
-
-
 License
 -----------
 
-*Narno_Service_Gandi* is released under the terms of the [MIT license](http://opensource.org/licenses/MIT).
+*ZendService_Gandi* is released under the terms of the [MIT license](http://opensource.org/licenses/MIT).
 
-Copyright (c) 2011-2012 Arnaud Ligny
+Copyright (c) 2011-2014 Arnaud Ligny

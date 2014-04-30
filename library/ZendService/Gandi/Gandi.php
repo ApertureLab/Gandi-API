@@ -1,29 +1,27 @@
 <?php
 /**
- * Zend_Service_Gandi
+ * ZendService\Gandi
  *
  * @link      https://github.com/Narno/Zend_Service_Gandi
- * @copyright Copyright (c) 2011-2013 Arnaud Ligny
+ * @copyright Copyright (c) 2011-2014 Arnaud Ligny
  * @license   http://opensource.org/licenses/MIT MIT license
  * @package   Zend_Service
  */
 
-/**
- * @see Zend_XmlRpc_Client
- */
-require_once 'Zend/XmlRpc/Client.php';
+namespace ZendService\Gandi;
+
+use Zend\XmlRpc;
+use Zend\Http\Client as HttpClient;
 
 /**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Gandi
- * 
- * @todo Make it compatible with 3.3.0 version
  */
-class Zend_Service_Gandi
+class Gandi
 {
     /**
-     * Gandi Hosting API key
+     * Gandi API key
      *
      * @var string
      */
@@ -31,14 +29,14 @@ class Zend_Service_Gandi
 
     /**
      * Reference to the XML-RPC client
-     *
+     * 
      * @var Zend_XmlRpc_Client
      */
     protected $_client;
 
     /**
      * Sets the API key and instantiates the XML-RPC client
-     *
+     * 
      * @param  string $apiKey
      * @return void
      */
@@ -47,11 +45,16 @@ class Zend_Service_Gandi
         $this->_apiKey = (string) $apiKey;
 
         try {
-            $this->_client = new Zend_XmlRpc_Client('https://rpc.gandi.net/xmlrpc/');
+            $httpClient = new HttpClient('https://rpc.gandi.net/xmlrpc/', array(
+                'adapter' => 'Zend\Http\Client\Adapter\Socket',
+                'sslverifypeer' => false
+            ));
+            $this->_client = new XmlRpc\Client(null);
+            $this->_client->setHttpClient($httpClient);
             $this->_client->setSkipSystemLookup(true);
-        } catch (Zend_XmlRpc_Client_FaultException $e) {
+        } catch (XmlRpc\Client\FaultException $e) {
             throw new Exception('Fault Exception: ' . $e->getCode() . "\n" . $e->getMessage());
-        } catch (Zend_XmlRpc_Client_HttpException $e) {
+        } catch (XmlRpc\Client\HttpException $e) {
             throw new Exception('HTTP Exception: ' . $e->getCode() . "\n" . $e->getMessage());
         }
     }
@@ -66,11 +69,43 @@ class Zend_Service_Gandi
     private function _call($method, $params = NULL) {
         try {
             return $this->_client->call($method, $params);
-        } catch (Zend_XmlRpc_Client_FaultException $e) {
+        } catch (XmlRpc\Client\FaultException $e) {
             throw new Exception('Fault Exception: ' . $e->getCode() . "\n" . $e->getMessage());
         }
     }
-    
+
+    /**
+     * Introspection
+     * 
+     * @return array
+     */
+    public function listMethods()
+    {
+        return $this->_call('system.listMethods');
+    }
+
+    /**
+     * Available methods
+     * 
+     * @param  string $method Method name
+     * @return array
+     */
+    public function methodHelp($method)
+    {
+        return $this->_call('system.methodHelp', array($method));
+    }
+
+    /**
+     * methodSignature description
+     * 
+     * @param  string $method Method name
+     * @return array
+     */
+    public function methodSignature($method)
+    {
+        return $this->_call('system.methodSignature', array($method));
+    }
+
     /**
      * Get Gandi Hosting account info
      * 
@@ -92,9 +127,9 @@ class Zend_Service_Gandi
     }
     
     /**
-     * Get VM info by VM Id filter
+     * Get VM info
      * 
-     * @param integer $id
+     * @param integer PASS id
      * @return array
      */
     public function getVmInfo($id)
@@ -103,29 +138,23 @@ class Zend_Service_Gandi
     }
     
     /**
-     * Return graph URL
+     * Get PASS info
      * 
-     * @param integer $vmId
-     * @param string $target vcpu, vdi or vif
-     * @param integer $deviceNumber
-     * @return string URL
-     */
-    public function getGraph($vmId, $target, $deviceNumber)
-    {
-        $vmInfo = $this->getVmInfo($vmId);
-        try {
-            return $vmInfo['graph_urls'][$target][$deviceNumber];
-        } catch (Exception $e) {
-            throw new Exception($e->getTraceAsString());
-        }
-    }
-    
-    /**
-     * @todo Implement PASS API methods
-     * @link http://doc.rpc.gandi.net/paas/reference.html
+     * @param  integer $id PASS id
+     * @return array
      */
     public function getPassInfo($id)
     {
         return $this->_call('paas.info', array($this->_apiKey, (int)$id));
+    }
+
+    /**
+     * Get PASS list
+     * 
+     * @return array
+     */
+    public function getPassList()
+    {
+        return $this->_call('paas.list', array($this->_apiKey));
     }
 }

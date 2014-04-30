@@ -1,0 +1,28 @@
+{
+  "name": "narno/zendservice-gandi",
+  "description": "Simple PHP library for the Gandi API.",
+  "type": "library",
+  "keywords": [
+    "gandi",
+    "zf2"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Arnaud Ligny",
+      "email": "arnaud@ligny.org",
+      "homepage": "http://narno.org",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "ZendService\\Gandi\\": "library/"
+    }
+  },
+  "require": {
+    "php": ">=5.3",
+    "zendframework/zend-xmlrpc": ">=2.3",
+    "zendframework/zendxml": ">=1.0"
+  }
+}
