@@ -8,8 +8,8 @@ Dependencies
 ------------
 
 * PHP 5.3+
-* Zend\Xmlrpc
-* Zend\Xml
+* [Zend\Xmlrpc](https://github.com/zendframework/Component_ZendXmlRpc)
+* [Zend\Xml](https://github.com/zendframework/ZendXml)
 * [Gandi](https://www.gandi.net) account
 
 
@@ -35,9 +35,13 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 use ZendService\Gandi\Gandi as Gandi;
 
 try {
-    $gandi = new Gandi('your_api_key');
-    // Fetches VM infos and print
-    print_r($gandi->getVmInfo('your_vm_id'));
+    $gandi = new Gandi();
+    // set API key
+    $params = array('your_api_key');
+    // fetches account informations...
+    $account = $gandi->account->info($params);
+    // and print
+    print_r($account);
 } catch (Exception $e) {
     echo $e->getMessage();
 }

@@ -21,42 +21,134 @@ use Zend\Http\Client as HttpClient;
 class Gandi
 {
     /**
-     * Gandi API key
+     * XML-RPC client
+     * 
+     * @var Zend\XmlRpc\Client
+     */
+    protected $xmlRpcClient;
+
+    /**
+     * Current method category (for method proxying)
      *
      * @var string
      */
-    protected $_apiKey;
+    protected $methodCategory;
 
     /**
-     * Reference to the XML-RPC client
-     * 
-     * @var Zend_XmlRpc_Client
+     * Categories of API methods
+     *
+     * @var array
      */
-    protected $_client;
+    protected $methodCategories = array(
+        'account',
+        'catalog',
+        'cert',
+        'chnageowner',
+        'contact',
+        'datacenter',
+        'disk',
+        'domain',
+        'hosting',
+        'iface',
+        'image',
+        'ip',
+        'operation',
+        'paas',
+        'product',
+        'site',
+        'system',
+        'version',
+        'vm',
+    );
 
     /**
-     * Sets the API key and instantiates the XML-RPC client
-     * 
-     * @param  string $apiKey
-     * @return void
+     * Instantiates the XML-RPC client
      */
-    public function __construct($apiKey)
+    public function __construct()
     {
-        $this->_apiKey = (string) $apiKey;
-
         try {
+            $this->xmlRpcClient = new XmlRpc\Client(null);
             $httpClient = new HttpClient('https://rpc.gandi.net/xmlrpc/', array(
                 'adapter' => 'Zend\Http\Client\Adapter\Socket',
                 'sslverifypeer' => false
             ));
-            $this->_client = new XmlRpc\Client(null);
-            $this->_client->setHttpClient($httpClient);
-            $this->_client->setSkipSystemLookup(true);
+            $this->xmlRpcClient->setHttpClient($httpClient);
+            $this->xmlRpcClient->setSkipSystemLookup(true);
         } catch (XmlRpc\Client\FaultException $e) {
             throw new Exception('Fault Exception: ' . $e->getCode() . "\n" . $e->getMessage());
         } catch (XmlRpc\Client\HttpException $e) {
             throw new Exception('HTTP Exception: ' . $e->getCode() . "\n" . $e->getMessage());
         }
+    }
+
+    /**
+     * Proxy service methods category
+     *
+     * @param  string $category
+     * @return self
+     * @throws Exception If method not in method categories list
+     */
+    public function __get($category)
+    {
+        $category = strtolower($category);
+
+        /*
+        if (!in_array($category, $this->methodCategories)) {
+            throw new Exception\RuntimeException(
+                'Invalid method category "' . $category . '"'
+            );
+        }
+        */
+
+        $this->methodCategory[] = $category;
+        return $this;
+    }
+
+    /**
+     * Method overloading
+     *
+     * @param  string $method
+     * @param  array $params
+     * @return mixed
+     * @throws Exception\RuntimeException if unable to find method
+     */
+    public function __call($method, $args)
+     {
+        $params = array();
+        $apiMethod = '';
+
+        $method = strtolower($method);
+        if (!empty($args)) {
+            $params = $args[0];
+            if (!is_array($params)) {
+                throw new Exception\RuntimeException(
+                    '$params should be an array'
+                );
+            }
+        }
+
+        /**
+         * If method category is not setted
+         */
+        if (empty($this->methodCategory)) {
+            throw new Exception\RuntimeException(
+                'Invalid method "' . $method . '"'
+            );
+        }
+
+        /**
+         * Build Mailjet method name: category + method
+         */
+        foreach ($this->methodCategory as $methodCategory) {
+            $apiMethod .= $methodCategory . '.';
+        }
+        $this->methodCategory = array();
+        $method = $apiMethod . $method;
+
+        /**
+         * Request API directly
+         */
+        return $this->request($method, $params);
     }
 
     /**
@@ -66,9 +158,9 @@ class Gandi
      * @param array $params
      * @return array
      */
-    private function _call($method, $params = NULL) {
+    private function request($method, $params = array()) {
         try {
-            return $this->_client->call($method, $params);
+            return $this->xmlRpcClient->call($method, $params);
         } catch (XmlRpc\Client\FaultException $e) {
             throw new Exception('Fault Exception: ' . $e->getCode() . "\n" . $e->getMessage());
         }
@@ -76,85 +168,37 @@ class Gandi
 
     /**
      * Introspection
+     */
+
+    /**
+     * Available methods
      * 
      * @return array
      */
     public function listMethods()
     {
-        return $this->_call('system.listMethods');
+        return $this->request('system.listMethods');
     }
 
     /**
-     * Available methods
+     * Method help
      * 
      * @param  string $method Method name
      * @return array
      */
     public function methodHelp($method)
     {
-        return $this->_call('system.methodHelp', array($method));
+        return $this->request('system.methodHelp', array($method));
     }
 
     /**
-     * methodSignature description
+     * Method signature
      * 
      * @param  string $method Method name
      * @return array
      */
     public function methodSignature($method)
     {
-        return $this->_call('system.methodSignature', array($method));
-    }
-
-    /**
-     * Get Gandi Hosting account info
-     * 
-     * @return array
-     */
-    public function getAccountInfo()
-    {
-        return $this->_call('account.info', array($this->_apiKey));
-    }
-    
-    /**
-     * Get VM list
-     * 
-     * @return array 
-     */
-    public function getVmList()
-    {
-        return $this->_call('vm.list', array($this->_apiKey));
-    }
-    
-    /**
-     * Get VM info
-     * 
-     * @param integer PASS id
-     * @return array
-     */
-    public function getVmInfo($id)
-    {
-        return $this->_call('vm.info', array($this->_apiKey, (int)$id));
-    }
-    
-    /**
-     * Get PASS info
-     * 
-     * @param  integer $id PASS id
-     * @return array
-     */
-    public function getPassInfo($id)
-    {
-        return $this->_call('paas.info', array($this->_apiKey, (int)$id));
-    }
-
-    /**
-     * Get PASS list
-     * 
-     * @return array
-     */
-    public function getPassList()
-    {
-        return $this->_call('paas.list', array($this->_apiKey));
+        return $this->request('system.methodSignature', array($method));
     }
 }
