@@ -35,7 +35,7 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     $loader = include __DIR__ . '/vendor/autoload.php';
 }
 
-use ZendService\Gandi\Gandi as Gandi;
+use ZendService\Gandi\Gandi;
 
 try {
     $gandi = new Gandi();
