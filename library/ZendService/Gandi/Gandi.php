@@ -2,7 +2,7 @@
 /**
  * ZendService\Gandi
  *
- * @link      https://github.com/Narno/Zend_Service_Gandi
+ * @link      https://github.com/Narno/ZendService_Gandi
  * @copyright Copyright (c) 2011-2014 Arnaud Ligny
  * @license   http://opensource.org/licenses/MIT MIT license
  * @package   Zend_Service
@@ -91,15 +91,6 @@ class Gandi
     public function __get($category)
     {
         $category = strtolower($category);
-
-        /*
-        if (!in_array($category, $this->methodCategories)) {
-            throw new Exception\RuntimeException(
-                'Invalid method category "' . $category . '"'
-            );
-        }
-        */
-
         $this->methodCategory[] = $category;
         return $this;
     }
@@ -137,7 +128,7 @@ class Gandi
         }
 
         /**
-         * Build Mailjet method name: category + method
+         * Build method name: category1 + category2 + categoryX + method
          */
         foreach ($this->methodCategory as $methodCategory) {
             $apiMethod .= $methodCategory . '.';
@@ -168,6 +159,8 @@ class Gandi
 
     /**
      * Introspection
+     *
+     * @todo useful or not?
      */
 
     /**
