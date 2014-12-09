@@ -16,10 +16,13 @@ Dependencies
 Installation
 ------------
 
-You can install this component using Composer with following commands:
+The recommended way is through [Composer](https://getcomposer.org).
 
-    curl -s https://getcomposer.org/installer | php
-    php composer.phar install
+    {
+        "require": {
+            "narno/zendservice-gandi": "dev-master"
+        }
+    }
 
 
 Usage
