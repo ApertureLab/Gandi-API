@@ -1,40 +1,29 @@
-Description
------------
+## Description
 
 *ZendService_Gandi* provides a simple PHP library for the [Gandi API](http://doc.rpc.gandi.net).
 
-
-Dependencies
-------------
+## Dependencies
 
 * PHP 5.3+
 * [Zend\Xmlrpc](https://github.com/zendframework/Component_ZendXmlRpc)
 * [Zend\Xml](https://github.com/zendframework/ZendXml)
 * [Gandi](https://www.gandi.net) account
 
-
-Installation
-------------
+## Installation
 
 The recommended way is through [Composer](https://getcomposer.org).
-
-    {
-        "require": {
-            "narno/zendservice-gandi": "dev-master"
-        }
+```
+{
+    "require": {
+        "narno/zendservice-gandi": "dev-master"
     }
+}
+```
 
-
-Usage
------
+## Usage
 
 ```php
 <?php
-// Composer autoloading
-if (file_exists(__DIR__ . '/vendor/autoload.php')) {
-    $loader = include __DIR__ . '/vendor/autoload.php';
-}
-
 use ZendService\Gandi\Gandi;
 
 try {
@@ -50,10 +39,8 @@ try {
 }
 ```
 
-
-License
------------
+## License
 
 *ZendService_Gandi* is released under the terms of the [MIT license](http://opensource.org/licenses/MIT).
 
-Copyright (c) 2011-2014 Arnaud Ligny
+Copyright (c) 2011-2016 Arnaud Ligny
