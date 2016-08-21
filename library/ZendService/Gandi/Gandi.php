@@ -11,6 +11,9 @@ namespace ZendService\Gandi;
 
 use Zend\Http\Client as HttpClient;
 use Zend\XmlRpc;
+use Zend\XmlRpc\Client\Exception\FaultException;
+use Zend\XmlRpc\Client\Exception\HttpException;
+use ZendService\Gandi\Exception\RuntimeException;
 
 /**
  * @category Zend
@@ -71,10 +74,10 @@ class Gandi
             ]);
             $this->xmlRpcClient->setHttpClient($httpClient);
             $this->xmlRpcClient->setSkipSystemLookup(true);
-        } catch (XmlRpc\Client\FaultException $e) {
-            throw new Exception('Fault Exception: '.$e->getCode()."\n".$e->getMessage());
-        } catch (XmlRpc\Client\HttpException $e) {
-            throw new Exception('HTTP Exception: '.$e->getCode()."\n".$e->getMessage());
+        } catch (FaultException $e) {
+            throw new RuntimeException('Fault Exception: '.$e->getCode()."\n".$e->getMessage());
+        } catch (HttpException $e) {
+            throw new RuntimeException('HTTP Exception: '.$e->getCode()."\n".$e->getMessage());
         }
     }
 
@@ -99,7 +102,7 @@ class Gandi
      * @param string $method
      * @param array  $args
      *
-     * @throws Exception\RuntimeException if unable to find method
+     * @throws RuntimeException if unable to find method
      *
      * @return mixed
      */
@@ -112,7 +115,7 @@ class Gandi
         if (!empty($args)) {
             $params = $args[0];
             if (!is_array($params)) {
-                throw new Exception\RuntimeException(
+                throw new RuntimeException(
                     '$params should be an array'
                 );
             }
@@ -122,7 +125,7 @@ class Gandi
          * If method category is not set
          */
         if (empty($this->methodCategory)) {
-            throw new Exception\RuntimeException(
+            throw new RuntimeException(
                 'Invalid method "'.$method.'"'
             );
         }
@@ -154,8 +157,8 @@ class Gandi
     {
         try {
             return $this->xmlRpcClient->call($method, $params);
-        } catch (XmlRpc\Client\FaultException $e) {
-            throw new Exception('Fault Exception: '.$e->getCode()."\n".$e->getMessage());
+        } catch (FaultException $e) {
+            throw new RuntimeException('Fault Exception: '.$e->getCode()."\n".$e->getMessage());
         }
     }
 
