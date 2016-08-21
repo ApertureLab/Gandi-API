@@ -1,2 +1,7 @@
+# Files to exclude when creating archive
+tests/ export-ignore
+.* export-ignore
+phpunit.xml.dist export-ignore
+
 # Auto detect text files and perform LF normalization
 * text=auto
