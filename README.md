@@ -1,23 +1,18 @@
-## Description
+# ZendService_Gandi
 
-*ZendService_Gandi* provides a simple PHP library for the [Gandi API](http://doc.rpc.gandi.net).
+*ZendService_Gandi* provides a simple PHP library for the [Gandi API](http://doc.rpc.gandi.net/overview.html).
 
 ## Dependencies
 
-* PHP 5.3+
-* [Zend\Xmlrpc](https://github.com/zendframework/Component_ZendXmlRpc)
-* [Zend\Xml](https://github.com/zendframework/ZendXml)
-* [Gandi](https://www.gandi.net) account
+* PHP 5.4+
+* [zend-xmlrpc](https://github.com/zendframework/zend-xmlrpc)
+* [Gandi API key](https://www.gandi.net/admin/api_key)
 
 ## Installation
 
 The recommended way is through [Composer](https://getcomposer.org).
 ```
-{
-    "require": {
-        "narno/zendservice-gandi": "dev-master"
-    }
-}
+$ composer require narno/zendservice-gandi
 ```
 
 ## Usage
@@ -29,12 +24,12 @@ use ZendService\Gandi\Gandi;
 try {
     $gandi = new Gandi();
     // set API key
-    $params = array('your_api_key');
+    $params = ['your_api_key'];
     // fetches account informations...
     $account = $gandi->account->info($params);
     // and print
     print_r($account);
-} catch (Exception $e) {
+} catch (\Exception $e) {
     echo $e->getMessage();
 }
 ```
