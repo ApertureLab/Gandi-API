@@ -1,6 +1,6 @@
-# ZendService_Gandi
+# Gandi-API
 
-*ZendService_Gandi* provides a simple PHP library for the [Gandi API](http://doc.rpc.gandi.net/overview.html).
+*Gandi-API* provides a simple PHP library for the [Gandi API](http://doc.rpc.gandi.net/overview.html).
 
 ## Dependencies
 
@@ -12,21 +12,21 @@
 
 The recommended way is through [Composer](https://getcomposer.org).
 ```
-$ composer require narno/zendservice-gandi
+$ composer require narno/gandi-api
 ```
 
 ## Usage
 
 ```php
 <?php
-use ZendService\Gandi\Gandi;
+use Narno\Gandi\Api as GandiAPI;
 
 try {
-    $gandi = new Gandi();
+    $api = new GandiAPI();
     // set API key
     $params = ['your_api_key'];
     // fetches account informations...
-    $account = $gandi->account->info($params);
+    $account = $api->account->info($params);
     // and print
     print_r($account);
 } catch (\Exception $e) {
@@ -36,6 +36,6 @@ try {
 
 ## License
 
-*ZendService_Gandi* is released under the terms of the [MIT license](http://opensource.org/licenses/MIT).
+*Gandi-API* is released under the terms of the [MIT license](http://opensource.org/licenses/MIT).
 
 Copyright (c) 2011-2016 Arnaud Ligny
