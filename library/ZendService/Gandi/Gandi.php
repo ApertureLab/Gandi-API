@@ -43,7 +43,7 @@ class Gandi
         'account',
         'catalog',
         'cert',
-        'chnageowner',
+        'changeowner',
         'contact',
         'datacenter',
         'disk',
