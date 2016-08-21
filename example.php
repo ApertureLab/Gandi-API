@@ -5,25 +5,25 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
     $loader = include __DIR__.'/vendor/autoload.php';
 }
 
-use ZendService\Gandi\Gandi;
+define('API_KEY', 'xxxxxxxxxxxxxxxxxxxxxxxx');
+
+use Narno\Gandi\Api as GandiAPI;
 
 try {
-    $gandi = new Gandi(true);
-
-    $apiKey = 'xxxxxxxxxx';
+    $api = new GandiAPI(true);
 
     // account info
-    print_r($gandi->account->info([$apiKey]));
+    print_r($api->account->info([API_KEY]));
 
     // PASS vhost list
-    print_r($gandi->paas->vhost->list([$apiKey]));
+    print_r($api->paas->vhost->list([API_KEY]));
 
     // PASS vhost info
-    print_r($gandi->paas->vhost->info([$apiKey, 'github.narno.org']));
+    print_r($api->paas->vhost->info([API_KEY, 'github.narno.org']));
 
     // PASS create (generic) vhost
-    print_r($gandi->paas->vhost->create([
-        $apiKey,
+    print_r($api->paas->vhost->create([
+        API_KEY,
         [
             'paas_id'    => 00000,
             'vhost'      => time().'.narno.org',

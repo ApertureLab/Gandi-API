@@ -1,24 +1,23 @@
 <?php
-/**
- * ZendService\Gandi.
+/*
+ * Copyright (c) Arnaud Ligny <arnaud@ligny.org>
  *
- * @link      https://github.com/Narno/ZendService_Gandi
- *
- * @copyright Copyright (c) 2011-2016 Arnaud Ligny
- * @license   http://opensource.org/licenses/MIT MIT license
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-namespace ZendService\Gandi;
+
+namespace Narno\Gandi;
 
 use Zend\Http\Client as HttpClient;
 use Zend\XmlRpc;
 use Zend\XmlRpc\Client\Exception\FaultException;
 use Zend\XmlRpc\Client\Exception\HttpException;
-use ZendService\Gandi\Exception\RuntimeException;
+use Narno\Gandi\Exception\RuntimeException;
 
 /**
- * @category Zend
+ * Class Api
  */
-class Gandi
+class Api
 {
     /**
      * XML-RPC client.
