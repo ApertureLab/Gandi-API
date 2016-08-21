@@ -8,14 +8,14 @@
 
 namespace Narno\Gandi;
 
+use Narno\Gandi\Exception\RuntimeException;
 use Zend\Http\Client as HttpClient;
 use Zend\XmlRpc;
 use Zend\XmlRpc\Client\Exception\FaultException;
 use Zend\XmlRpc\Client\Exception\HttpException;
-use Narno\Gandi\Exception\RuntimeException;
 
 /**
- * Class Api
+ * Class Api.
  */
 class Api
 {
