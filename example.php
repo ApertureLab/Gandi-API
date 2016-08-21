@@ -8,7 +8,7 @@ if (file_exists(__DIR__.'/vendor/autoload.php')) {
 use ZendService\Gandi\Gandi;
 
 try {
-    $gandi = new Gandi();
+    $gandi = new Gandi(true);
 
     $apiKey = 'xxxxxxxxxx';
 

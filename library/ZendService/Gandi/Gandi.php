@@ -63,12 +63,14 @@ class Gandi
 
     /**
      * Instantiates the XML-RPC client.
+     *
+     * @param bool $ote Set to true to use Operational Test and Evaluation
      */
-    public function __construct()
+    public function __construct($ote = false)
     {
         try {
             $this->xmlRpcClient = new XmlRpc\Client(null);
-            $httpClient = new HttpClient('https://rpc.gandi.net/xmlrpc/', [
+            $httpClient = new HttpClient($ote ? 'https://rpc.ote.gandi.net/xmlrpc/' : 'https://rpc.gandi.net/xmlrpc/', [
                 'adapter'       => 'Zend\Http\Client\Adapter\Socket',
                 'sslverifypeer' => false,
             ]);
