@@ -3,7 +3,7 @@
 namespace ZendService\Gandi\Exception;
 
 /**
- * @category   Zend
+ * @category Zend
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {

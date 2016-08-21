@@ -4,7 +4,7 @@
  *
  * @link      https://github.com/Narno/ZendService_Gandi
  *
- * @copyright Copyright (c) 2011-2014 Arnaud Ligny
+ * @copyright Copyright (c) 2011-2016 Arnaud Ligny
  * @license   http://opensource.org/licenses/MIT MIT license
  */
 namespace ZendService\Gandi;
@@ -13,21 +13,21 @@ use Zend\Http\Client as HttpClient;
 use Zend\XmlRpc;
 
 /**
- * @category   Zend
+ * @category Zend
  */
 class Gandi
 {
     /**
      * XML-RPC client.
      *
-     * @var Zend\XmlRpc\Client
+     * @var XmlRpc\Client
      */
     protected $xmlRpcClient;
 
     /**
      * Current method category (for method proxying).
      *
-     * @var string
+     * @var string|array
      */
     protected $methodCategory;
 
@@ -83,8 +83,6 @@ class Gandi
      *
      * @param string $category
      *
-     * @throws Exception If method not in method categories list
-     *
      * @return self
      */
     public function __get($category)
@@ -99,7 +97,7 @@ class Gandi
      * Method overloading.
      *
      * @param string $method
-     * @param array  $params
+     * @param array  $args
      *
      * @throws Exception\RuntimeException if unable to find method
      *
@@ -121,7 +119,7 @@ class Gandi
         }
 
         /*
-         * If method category is not setted
+         * If method category is not set
          */
         if (empty($this->methodCategory)) {
             throw new Exception\RuntimeException(
