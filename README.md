@@ -38,6 +38,6 @@ try {
 
 ## License
 
-_Gandi-API_ is a free software distributed under the terms of the [MIT license](http://opensource.org/licenses/MIT).
+Free software distributed under the terms of the [MIT license](http://opensource.org/licenses/MIT).
 
 © [Arnaud Ligny](https://arnaudligny.fr)
