@@ -1,8 +1,8 @@
 # Gandi-API
 
-> Simple PHP library for the [Gandi API](http://doc.rpc.gandi.net/overview.html).
+> A simple PHP library for the [Gandi API](http://doc.rpc.gandi.net/overview.html).
 
-[![Latest Stable Version](https://poser.pugx.org/narno/gandi-api/v/stable)](https://packagist.org/packages/narno/gandi-api) [![Latest Unstable Version](https://poser.pugx.org/narno/gandi-api/v/unstable)](https://packagist.org/packages/narno/gandi-api) [![Total Downloads](https://poser.pugx.org/narno/gandi-api/downloads)](https://packagist.org/packages/narno/gandi-api) [![License](https://poser.pugx.org/narno/gandi-api/license)](https://packagist.org/packages/narno/gandi-api) 
+[![Latest Stable Version](https://poser.pugx.org/narno/gandi-api/v/stable)](https://packagist.org/packages/narno/gandi-api) [![Total Downloads](https://poser.pugx.org/narno/gandi-api/downloads)](https://packagist.org/packages/narno/gandi-api) [![License](https://poser.pugx.org/narno/gandi-api/license)](https://github.com/Narno/Gandi-API/blob/master/LICENSE) 
 
 ## Dependencies
 
@@ -38,6 +38,6 @@ try {
 
 ## License
 
-Gandi-API is a free software distributed under the terms of the [MIT license](http://opensource.org/licenses/MIT).
+_Gandi-API_ is a free software distributed under the terms of the [MIT license](http://opensource.org/licenses/MIT).
 
-© 2017 [Arnaud Ligny](http://arnaudligny.fr)
+© [Arnaud Ligny](https://arnaudligny.fr)
