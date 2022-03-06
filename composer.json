@@ -3,7 +3,7 @@
   "replace": {"narno/zendservice-gandi": "self.version"},
   "description": "Simple PHP library for the Gandi API.",
   "keywords": ["gandi", "api", "zf2"],
-  "homepage": "https://github.com/Narno/Gandi-API",
+  "homepage": "https://project.aperturelab.fr/Gandi-API/",
   "license": "MIT",
   "type": "library",
   "authors": [
