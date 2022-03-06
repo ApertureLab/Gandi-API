@@ -1,6 +1,6 @@
 # Gandi-API
 
-> A simple PHP library for the [Gandi API](http://doc.rpc.gandi.net/overview.html).
+A simple PHP library for the [Gandi API](http://doc.rpc.gandi.net/overview.html).
 
 [![Latest Stable Version](https://poser.pugx.org/narno/gandi-api/v/stable)](https://packagist.org/packages/narno/gandi-api) [![Total Downloads](https://poser.pugx.org/narno/gandi-api/downloads)](https://packagist.org/packages/narno/gandi-api) [![License](https://poser.pugx.org/narno/gandi-api/license)](https://github.com/Narno/Gandi-API/blob/master/LICENSE) 
 
@@ -13,8 +13,9 @@
 ## Installation
 
 The recommended way is through [Composer](https://getcomposer.org).
+
 ```bash
-$ composer require narno/gandi-api
+composer require narno/gandi-api
 ```
 
 ## Usage
