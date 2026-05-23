@@ -1,8 +1,8 @@
-# Gandi-API
+# Gandi API
 
 A simple PHP library for the [Gandi API](http://doc.rpc.gandi.net/overview.html).
 
-[![Latest Stable Version](https://poser.pugx.org/narno/gandi-api/v/stable)](https://packagist.org/packages/narno/gandi-api) [![Total Downloads](https://poser.pugx.org/narno/gandi-api/downloads)](https://packagist.org/packages/narno/gandi-api) [![License](https://poser.pugx.org/narno/gandi-api/license)](https://github.com/Narno/Gandi-API/blob/master/LICENSE) 
+[![Latest Stable Version](https://poser.pugx.org/aperturelab/gandi-api/v/stable)](https://packagist.org/packages/aperturelab/gandi-api) [![Total Downloads](https://poser.pugx.org/aperturelab/gandi-api/downloads)](https://packagist.org/packages/aperturelab/gandi-api) [![License](https://poser.pugx.org/aperturelab/gandi-api/license)](https://github.com/ApertureLab/Gandi-API/blob/master/LICENSE) 
 
 ## Dependencies
 
@@ -15,17 +15,17 @@ A simple PHP library for the [Gandi API](http://doc.rpc.gandi.net/overview.html)
 The recommended way is through [Composer](https://getcomposer.org).
 
 ```bash
-composer require narno/gandi-api
+composer require aperturelab/gandi-api
 ```
 
 ## Usage
 
 ```php
 <?php
-use Narno\Gandi\Api as GandiAPI;
+use ApertureLab\Gandi\Api as GandiApi;
 
 try {
-    $api = new GandiAPI();
+    $api = new GandiApi();
     // set API key
     $params = ['your_api_key'];
     // fetches account informations...

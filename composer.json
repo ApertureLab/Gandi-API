@@ -1,6 +1,9 @@
 {
-  "name": "narno/gandi-api",
-  "replace": {"narno/zendservice-gandi": "self.version"},
+  "name": "aperturelab/gandi-api",
+  "replace": {
+    "narno/zendservice-gandi": "self.version",
+    "narno/gandi-api": "self.version"
+  },
   "description": "Simple PHP library for the Gandi API.",
   "keywords": ["gandi", "api", "zf2"],
   "homepage": "https://project.aperturelab.fr/Gandi-API/",
@@ -20,7 +23,7 @@
   },
   "autoload": {
     "psr-4" : {
-      "Narno\\Gandi\\": "src"
+      "ApertureLab\\Gandi\\": "src"
     }
   },
   "extra": {

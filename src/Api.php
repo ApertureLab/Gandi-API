@@ -6,9 +6,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Narno\Gandi;
+namespace ApertureLab\Gandi;
 
-use Narno\Gandi\Exception\RuntimeException;
+use ApertureLab\Gandi\Exception\RuntimeException;
 use Zend\Http\Client as HttpClient;
 use Zend\XmlRpc;
 use Zend\XmlRpc\Client\Exception\FaultException;

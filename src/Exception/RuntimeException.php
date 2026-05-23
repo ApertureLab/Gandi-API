@@ -6,7 +6,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Narno\Gandi\Exception;
+namespace ApertureLab\Gandi\Exception;
 
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
